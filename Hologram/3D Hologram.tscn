@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Hologram/3D Hologram.shader" type="Shader" id=1]
+[ext_resource path="res://resources/suzanne.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://resources/hologram_lines.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/baseColor = Color( 0.3058, 0.835, 0.96, 1 )
+shader_param/speed = 0.12
+shader_param/linesColor = Color( 0.633232, 0.910156, 0.555693, 1 )
+shader_param/linesColorIntensity = 5.0
+shader_param/emissionValue = 1.5
+shader_param/hologramTextureTiling = Vector2( 1, 1 )
+shader_param/hologramTexture = ExtResource( 3 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+material_override = SubResource( 1 )
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.747601, 0.664148, 0, -0.664148, 0.747601, 0, 8.89293, 15.0303 )
