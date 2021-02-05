@@ -17,3 +17,15 @@ Dissolve effect that can be adapted to use different shapes and directions.
 Nice hologram effect for Godot. All the effect parameters can be customised via the shader params panel.
 
 ![Dissolve](https://raw.githubusercontent.com/ceceppa/godot-shaders-gifs/main/3D/hologram.gif)
+
+### Vertical Dissolve
+
+Vertical dissolve shader, fully customizable:
+
+![Dissolve](https://raw.githubusercontent.com/ceceppa/godot-shaders-gifs/main/3D/vertical%20dissolve.gif)
+
+### Position Dissolve
+
+Dissolve shader according to a 3D position
+
+![Dissolve](https://raw.githubusercontent.com/ceceppa/godot-shaders-gifs/main/3D/dissolve.gif)
