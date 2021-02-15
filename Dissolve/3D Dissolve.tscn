@@ -13,24 +13,24 @@ noise = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 7 )
-shader_param/offset = Vector3( -1.18239, 9.04055, -0.643737 )
+shader_param/offset = Vector3( -0.616594, 6.84905, 0.662125 )
 shader_param/borderColor = Color( 0.956863, 0.964706, 0.0313726, 1 )
 shader_param/borderHeight = 0.05
 shader_param/radius = 7.0
 shader_param/emissionIntensity = 5.0
-shader_param/noiseSpeed = 0.1
-shader_param/noiseInfluence = 1.0
+shader_param/noiseSpeed = 0.03
+shader_param/noiseInfluence = 0.5
 shader_param/UVScale = Vector2( 1, 1 )
 shader_param/blendUVScale = Vector2( 1, 1 )
 shader_param/noiseUVScale = Vector2( 1, 1 )
-shader_param/global_transform = Transform( 0.89418, -0.0023082, 0.447703, -0.0265333, 0.997956, 0.058139, -0.446922, -0.0638658, 0.89229, -3.16115, 0, 0 )
+shader_param/global_transform = Transform( 0.851078, -0.018422, 0.524718, -0.0785102, 0.983683, 0.161877, -0.519138, -0.178965, 0.835743, -3.16115, 0, 0 )
 shader_param/texture = ExtResource( 2 )
 shader_param/blendTexture = ExtResource( 1 )
 shader_param/noiseTexture = SubResource( 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
-shader_param/offset = Vector3( -1.18239, 9.04055, -0.643737 )
+shader_param/offset = Vector3( -0.616594, 6.84905, 0.662125 )
 shader_param/borderColor = Color( 0.956863, 0.964706, 0.0313726, 1 )
 shader_param/borderHeight = 0.0
 shader_param/radius = 7.0
@@ -40,7 +40,7 @@ shader_param/noiseInfluence = 0.5
 shader_param/UVScale = Vector2( 1, 1 )
 shader_param/blendUVScale = Vector2( 1, 1 )
 shader_param/noiseUVScale = Vector2( 4, 4 )
-shader_param/global_transform = Transform( 0.979113, 0.0376722, -0.199798, -0.0265333, 0.997956, 0.058139, 0.201581, -0.0516234, 0.97811, 4.19942, 0, 0 )
+shader_param/global_transform = Transform( 0.898009, 0.0906927, -0.430529, 0.00765781, 0.975155, 0.221393, 0.439912, -0.20211, 0.875002, 4.19942, 0, 0 )
 shader_param/texture = ExtResource( 2 )
 shader_param/blendTexture = ExtResource( 3 )
 shader_param/noiseTexture = SubResource( 1 )
@@ -73,7 +73,7 @@ size = Vector2( 400, 400 )
 script = ExtResource( 4 )
 
 [node name="Suzanne1" type="MeshInstance" parent="."]
-transform = Transform( 0.851078, -0.018422, 0.524718, -0.0785102, 0.983683, 0.161877, -0.519138, -0.178965, 0.835743, -3.16115, 0, 0 )
+transform = Transform( 0.851078, -0.0184219, 0.524717, -0.0785102, 0.983683, 0.161877, -0.519138, -0.178965, 0.835744, -3.16115, 0, 0 )
 mesh = ExtResource( 5 )
 material/0 = SubResource( 2 )
 
@@ -83,7 +83,7 @@ mesh = ExtResource( 5 )
 material/0 = SubResource( 3 )
 
 [node name="Box" type="MeshInstance" parent="."]
-transform = Transform( 0.696087, 0.717956, 0, -0.717956, 0.696088, 0, 0, 0, 1, -1.18239, 9.04055, -0.643737 )
+transform = Transform( 0.696087, 0.717956, 0, -0.717956, 0.696088, 0, 0, 0, 1, -0.616594, 6.84905, 0.662125 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
 

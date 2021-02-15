@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode cull_disabled;
 
 uniform sampler2D texture;
 uniform sampler2D blendTexture;
