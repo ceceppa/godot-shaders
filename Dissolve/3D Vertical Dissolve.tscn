@@ -13,7 +13,7 @@ noise = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 7 )
-shader_param/offset = -2.08988
+shader_param/offset = -2.76
 shader_param/up = false
 shader_param/borderColor = Color( 1, 1, 0, 1 )
 shader_param/borderHeight = 0.05
@@ -26,14 +26,14 @@ shader_param/noiseInfluence = 1.0
 shader_param/blendUVScale = Vector2( 1, 1 )
 shader_param/noiseUVScale = Vector2( 1, 1 )
 shader_param/textureUVScale = Vector2( 1, 1 )
-shader_param/global_transform = Transform( 0.924668, 0.0466011, -0.377911, -0.0265333, 0.997956, 0.058139, 0.379848, -0.0437321, 0.924014, 1.46714, 0, -0.0491964 )
+shader_param/global_transform = Transform( 0.924668, 0.0466012, -0.377911, -0.0265333, 0.997956, 0.058139, 0.379848, -0.0437321, 0.924014, 1.46714, 0, -0.0491964 )
 shader_param/texture = ExtResource( 2 )
 shader_param/blendTexture = ExtResource( 1 )
 shader_param/noiseTexture = SubResource( 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
-shader_param/offset = -2.08988
+shader_param/offset = -2.76
 shader_param/up = false
 shader_param/borderColor = Color( 1, 1, 0, 1 )
 shader_param/borderHeight = 0.05
@@ -46,7 +46,7 @@ shader_param/noiseInfluence = 0.5
 shader_param/blendUVScale = Vector2( 1, 1 )
 shader_param/noiseUVScale = Vector2( 1, 1 )
 shader_param/textureUVScale = Vector2( 1, 1 )
-shader_param/global_transform = Transform( 0.94034, 0.00518214, 0.340197, -0.0265333, 0.997956, 0.058139, -0.3392, -0.063697, 0.938555, -5.82008, 0, -0.147589 )
+shader_param/global_transform = Transform( 1, 0, 0, 0, 0.973984, -0.226617, 0, 0.226617, 0.973984, 0, 0, -0.148 )
 shader_param/texture = ExtResource( 2 )
 shader_param/blendTexture = ExtResource( 3 )
 shader_param/noiseTexture = SubResource( 1 )
@@ -75,8 +75,7 @@ from = 2.0
 to = 3.0
 
 [node name="Suzanne1" type="MeshInstance" parent="."]
-transform = Transform( 0.924668, 0.0466012, -0.377911, -0.0265333, 0.997956, 0.058139, 0.379848, -0.0437321, 0.924014, 1.46714, 0, -0.0491964 )
-visible = false
+transform = Transform( 0.924668, 0.0466012, -0.377911, -0.0265333, 0.997956, 0.058139, 0.379848, -0.0437321, 0.924014, 5.82053, 0, -0.0491964 )
 mesh = ExtResource( 5 )
 material/0 = SubResource( 2 )
 

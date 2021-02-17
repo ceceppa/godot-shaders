@@ -50,8 +50,13 @@ void fragment() {
 	color = mix(color, text, border2);
 
 	ALBEDO = color.rgb;
+
+	if (!FRONT_FACING) {
+		ALBEDO = borderColor.rgb;
+		NORMAL = VIEW;
+	}
+
 	ALPHA = color.a;
 	ALPHA_SCISSOR = 1.0;
-//	NORMALMAP = normal.rgb;
 	EMISSION = vec3(border1 - border2) * borderColor.rgb * emissionIntensity;
 }
