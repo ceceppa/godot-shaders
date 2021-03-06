@@ -13,7 +13,7 @@ noise = ExtResource( 6 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 7 )
-shader_param/offset = Vector3( -0.616594, 6.84905, 0.662125 )
+shader_param/offset = Vector3( -0.920953, 7.08759, 0.662125 )
 shader_param/borderColor = Color( 0.956863, 0.964706, 0.0313726, 1 )
 shader_param/borderHeight = 0.05
 shader_param/radius = 7.0
@@ -30,7 +30,7 @@ shader_param/noiseTexture = SubResource( 1 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
-shader_param/offset = Vector3( -0.616594, 6.84905, 0.662125 )
+shader_param/offset = Vector3( -0.920953, 7.08759, 0.662125 )
 shader_param/borderColor = Color( 0.956863, 0.964706, 0.0313726, 1 )
 shader_param/borderHeight = 0.0
 shader_param/radius = 7.0
@@ -83,7 +83,7 @@ mesh = ExtResource( 5 )
 material/0 = SubResource( 3 )
 
 [node name="Box" type="MeshInstance" parent="."]
-transform = Transform( 0.696087, 0.717956, 0, -0.717956, 0.696088, 0, 0, 0, 1, -0.616594, 6.84905, 0.662125 )
+transform = Transform( 0.696087, 0.717956, 0, -0.717956, 0.696088, 0, 0, 0, 1, -0.920953, 7.08759, 0.662125 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
 
@@ -99,7 +99,7 @@ environment = SubResource( 7 )
 far = 167.2
 
 [node name="Plane" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.935869, -0.352348, 0, 0.352348, 0.935869, 0, -13.2698, -12.6181 )
+transform = Transform( 1, 0, 0, 0, 0.935869, -0.352348, 0, 0.352348, 0.935869, -3.4285, -8.3309, -13.6426 )
 material_override = SubResource( 8 )
 mesh = SubResource( 9 )
 material/0 = null

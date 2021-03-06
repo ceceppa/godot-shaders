@@ -10,6 +10,12 @@ Dissolve effect that can be adapted to use different shapes and directions.
 
 ![Dissolve](https://raw.githubusercontent.com/ceceppa/godot-shaders-gifs/main/2D/dissolve.gif)
 
+### Wave distortion
+
+Customizable wave distortion effect
+
+![Wave](https://raw.githubusercontent.com/ceceppa/godot-shaders-gifs/main/2D/wave.gif)
+
 ## 3D
 
 ### Hologram

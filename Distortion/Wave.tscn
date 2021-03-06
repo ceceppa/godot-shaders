@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/Godot_icon.svg" type="Texture" id=1]
+[ext_resource path="res://Distortion/Wave.shader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/speed = 10.0
+shader_param/waves = 60.0
+
+[node name="Wave" type="Node2D"]
+
+[node name="Godot" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 506.246, 296.741 )
+scale = Vector2( 0.589049, 0.589049 )
+texture = ExtResource( 1 )
