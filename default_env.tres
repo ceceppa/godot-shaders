@@ -1,9 +1,12 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=3 format=3]
 
-[sub_resource type="ProceduralSky" id=1]
+[sub_resource type="ProceduralSkyMaterial" id=2]
+
+[sub_resource type="Sky" id=1]
+sky_material = SubResource( 2 )
 
 [resource]
-background_mode = 3
-background_sky = SubResource( 1 )
+background_mode = 2
+sky = SubResource( 1 )
 background_color = Color( 0.25098, 0.25098, 0.25098, 1 )
 glow_enabled = true

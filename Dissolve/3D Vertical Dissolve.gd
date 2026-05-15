@@ -1,33 +1,26 @@
-tool
-extends Spatial
+@tool
+extends Node3D
 
 var _offset := -2.0
 var _direction = 1
 
-export (bool) var testShader = false setget _test_shader
-export (float) var speed := 1.0
-export (float) var from := -3.0
-export (float) var to := 2.0
-
-func _ready():
-	var material: ShaderMaterial = $Suzanne1.get_surface_material(0)
-	var material2: ShaderMaterial = $Suzanne2.get_surface_material(0)
-
-	material.set_shader_param('global_transform', $Suzanne1.get_global_transform())
-	material2.set_shader_param('global_transform', $Suzanne2.get_global_transform())
+@export var testShader: bool = false: set = _test_shader
+@export var speed: float = 1.0
+@export var from: float = -3.0
+@export var to: float = 2.0
 
 func _process(delta):
 	if testShader:
-		var material: ShaderMaterial = $Suzanne1.get_surface_material(0)
-		var material2: ShaderMaterial = $Suzanne2.get_surface_material(0)
+		var material: ShaderMaterial = $Suzanne1.get_surface_override_material(0)
+		var material2: ShaderMaterial = $Suzanne2.get_surface_override_material(0)
 
 		_offset += speed * delta * _direction
 		if abs(_offset) > to:
 			_offset = to * _direction
 			_direction *= -1
 
-		material.set_shader_param('offset', _offset)
-		material2.set_shader_param('offset', _offset)
+		material.set_shader_parameter('offset', _offset)
+		material2.set_shader_parameter('offset', _offset)
 
 func _test_shader(v) -> void:
 	_offset = from

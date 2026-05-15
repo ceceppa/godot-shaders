@@ -6,8 +6,8 @@ const float NOISE_BORDER_SIZE = 0.05;
 uniform sampler2D texture2;
 uniform sampler2D noiseTexture;
 uniform float noise_speed = 1.;
-uniform vec4 borderColor: hint_color = vec4(1.);
- 
+uniform vec4 borderColor: source_color = vec4(1.);
+
 const vec3 GRAY_COLOR = vec3(0.299, 0.587, 0.114);
 
 float circle(vec2 uv, vec2 position, float radius) {
@@ -28,7 +28,7 @@ void fragment() {
 
 	vec4 color1 = texture(TEXTURE, UV);
 	vec4 color2 = texture(texture2, UV);
-	
+
 	float r = 0.1;
 	vec2 st = UV;
 	st.x = st.x - r * sin(TIME / noise_speed);
@@ -45,6 +45,6 @@ void fragment() {
 
 	vec4 c3 = mix(color2, color1, s1);
 	vec4 c4 = mix(c3, border2 * borderColor, border2.r);
-	
+
 	COLOR = c4;
 }
