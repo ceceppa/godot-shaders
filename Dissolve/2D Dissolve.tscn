@@ -1,23 +1,23 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource path="res://Dissolve/2D Dissolve.shader" type="Shader" id=1]
-[ext_resource path="res://resources/image2.jpg" type="Texture" id=2]
-[ext_resource path="res://resources/image1.png" type="Texture" id=3]
-[ext_resource path="res://resources/noise.tres" type="OpenSimplexNoise" id=4]
+[ext_resource path="res://Dissolve/2D Dissolve.gdshader" type="Shader" id=1]
+[ext_resource path="res://resources/image2.jpg" type="Texture2D" id=2]
+[ext_resource path="res://resources/image1.png" type="Texture2D" id=3]
+[ext_resource path="res://resources/noise.tres" type="FastNoiseLite" id=4]
 
-[sub_resource type="NoiseTexture" id=1]
+[sub_resource type="NoiseTexture2D" id=1]
 noise = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
-shader_param/noise_speed = 2.0
-shader_param/borderColor = Color( 0.945098, 0.678431, 0.113725, 1 )
-shader_param/texture2 = ExtResource( 2 )
-shader_param/noiseTexture = SubResource( 1 )
+shader_parameter/noise_speed = 2.0
+shader_parameter/borderColor = Color( 0.945098, 0.678431, 0.113725, 1 )
+shader_parameter/texture2 = ExtResource( 2 )
+shader_parameter/noiseTexture = SubResource( 1 )
 
 [node name="Node2D" type="Node2D"]
 
-[node name="image1" type="Sprite" parent="."]
+[node name="image1" type="Sprite2D" parent="."]
 material = SubResource( 2 )
 scale = Vector2( 0.826784, 0.688636 )
 texture = ExtResource( 3 )

@@ -1,8 +1,9 @@
-[gd_resource type="OpenSimplexNoise" format=2]
+[gd_resource type="FastNoiseLite" format=3]
 
 [resource]
+noise_type = 2
 seed = 312312
-octaves = 4
-period = 20.0
-persistence = 0.3
-lacunarity = 2.32
+frequency = 0.05
+fractal_octaves = 4
+fractal_lacunarity = 2.32
+fractal_gain = 0.3
