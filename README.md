@@ -2,6 +2,8 @@
 
 Collection of shaders for Godot engine
 
+**NOTE**: The master repo works only for Godot 4.6+, for previous version of Godot please check the "Godot-4.x" branch
+
 ## 2D
 
 ### Dissolve
