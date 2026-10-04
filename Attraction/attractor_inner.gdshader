@@ -32,7 +32,8 @@ void fragment() {
     vec3 color = mix(base_color.rgb, hot_color.rgb, energy);
     vec3 final_emission = color * emission_strength * pulse * (0.75 + core_mask * 0.5);
 
-    ALBEDO = color * 0.08;
+    // Unshaded output uses ALBEDO; HDR values feed environment glow.
+    ALBEDO = final_emission;
     EMISSION = final_emission;
-    ALPHA = 1.0;
+
 }

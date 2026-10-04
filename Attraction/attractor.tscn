@@ -3,14 +3,17 @@
 [ext_resource type="Shader" uid="uid://6og3dmygrvnj" path="res://Attraction/attractor_inner.gdshader" id="1_wm2lr"]
 [ext_resource type="Shader" uid="uid://cws5vn512qtud" path="res://Attraction/attractor_outer.gdshader" id="2_oycyv"]
 
+[ext_resource type="Shader" path="res://Attraction/showcase_surface.gdshader" id="3_surface"]
+[ext_resource type="Shader" path="res://Attraction/energy_mote.gdshader" id="4_mote"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wm2lr"]
 render_priority = 0
 shader = ExtResource("1_wm2lr")
-shader_parameter/base_color = Color(0.1, 0.7, 1, 1)
-shader_parameter/hot_color = Color(0.8, 1, 1, 1)
-shader_parameter/emission_strength = 5.5
+shader_parameter/base_color = Color(0.025, 0.25, 0.65, 1)
+shader_parameter/hot_color = Color(0.25, 0.8, 1, 1)
+shader_parameter/emission_strength = 1.8
 shader_parameter/pulse_speed = 2.2
-shader_parameter/pulse_amount = 0.18
+shader_parameter/pulse_amount = 0.1
 shader_parameter/swirl_scale = 8.0
 shader_parameter/swirl_speed = 1.8
 shader_parameter/band_scale = 10.0
@@ -19,33 +22,234 @@ shader_parameter/band_speed = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u7kom"]
 render_priority = 0
 shader = ExtResource("2_oycyv")
-shader_parameter/edge_color = Color(0.42631498, 0.84818405, 7.70092e-07, 1)
+shader_parameter/edge_color = Color(0.08, 0.65, 1, 1)
 shader_parameter/glow_color = Color(0.7, 1, 1, 1)
 shader_parameter/fresnel_power = 3.5
 shader_parameter/alpha_strength = 0.35
-shader_parameter/emission_strength = 3.0
+shader_parameter/emission_strength = 2.8
 shader_parameter/wave_scale = 10.0
 shader_parameter/wave_speed = 2.0
-shader_parameter/distortion_amount = 0.08
+shader_parameter/distortion_amount = 0.035
 shader_parameter/pulse_speed = 2.5
 shader_parameter/pulse_amount = 0.15
 
-[node name="Node3D" type="Node3D" unique_id=1432756584]
 
-[node name="Inner" type="CSGSphere3D" parent="." unique_id=1295884782]
+[sub_resource type="Environment" id="Environment_showcase"]
+background_mode = 1
+background_color = Color(0.006, 0.012, 0.023, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.18, 0.28, 0.45, 1)
+ambient_light_energy = 0.12
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.65
+glow_strength = 0.85
+glow_bloom = 0.08
+glow_hdr_threshold = 1.2
+ssr_enabled = true
+ssr_max_steps = 48
+ssao_enabled = true
+ssao_radius = 0.4
+ssao_intensity = 0.65
+fog_enabled = true
+fog_light_color = Color(0.025, 0.045, 0.075, 1)
+fog_light_energy = 0.35
+fog_density = 0.018
+
+[sub_resource type="ShaderMaterial" id="FloorMaterial"]
+shader = ExtResource("3_surface")
+shader_parameter/surface_color = Color(0.025, 0.035, 0.052, 1)
+shader_parameter/metalness = 0.55
+shader_parameter/roughness = 0.32
+shader_parameter/panel_strength = 0.08
+shader_parameter/panel_spacing = 1.8
+
+[sub_resource type="ShaderMaterial" id="PedestalMaterial"]
+shader = ExtResource("3_surface")
+shader_parameter/surface_color = Color(0.055, 0.072, 0.09, 1)
+shader_parameter/metalness = 0.8
+shader_parameter/roughness = 0.3
+shader_parameter/panel_strength = 0.0
+
+[sub_resource type="StandardMaterial3D" id="RingMaterial"]
+albedo_color = Color(0.02, 0.35, 0.5, 1)
+metallic = 0.65
+roughness = 0.3
+emission_enabled = true
+emission = Color(0.02, 0.55, 0.85, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="PlaneMesh" id="FloorMesh"]
+size = Vector2(200, 200)
+
+[sub_resource type="CylinderMesh" id="PedestalMesh"]
+top_radius = 1.08
+bottom_radius = 1.14
+height = 0.22
+radial_segments = 96
+
+[sub_resource type="CylinderMesh" id="TopMesh"]
+top_radius = 1.035
+bottom_radius = 1.035
+height = 0.035
+radial_segments = 96
+
+[sub_resource type="TorusMesh" id="RingMesh"]
+inner_radius = 1.035
+outer_radius = 1.055
+rings = 96
+ring_segments = 12
+
+[sub_resource type="Gradient" id="ParticleFade"]
+offsets = PackedFloat32Array(0, 0.18, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.8, 1, 1, 1, 0.65, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="ParticleFadeTexture"]
+gradient = SubResource("ParticleFade")
+
+[sub_resource type="ShaderMaterial" id="MoteMaterial"]
+shader = ExtResource("4_mote")
+shader_parameter/intensity = 2.0
+
+[sub_resource type="ShaderMaterial" id="AccentMaterial"]
+shader = ExtResource("4_mote")
+shader_parameter/energy_color = Color(0.5, 0.9, 1, 1)
+shader_parameter/intensity = 3.5
+
+[sub_resource type="QuadMesh" id="MoteMesh"]
+material = SubResource("MoteMaterial")
+size = Vector2(0.045, 0.045)
+
+[sub_resource type="QuadMesh" id="AccentMesh"]
+material = SubResource("AccentMaterial")
+size = Vector2(0.065, 0.065)
+
+[sub_resource type="ParticleProcessMaterial" id="MoteProcess"]
+emission_shape = 2
+emission_sphere_radius = 0.86
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 0.01
+initial_velocity_max = 0.04
+orbit_velocity_min = 0.08
+orbit_velocity_max = 0.16
+radial_accel_min = -0.015
+radial_accel_max = -0.005
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.25
+color_ramp = SubResource("ParticleFadeTexture")
+
+[sub_resource type="ParticleProcessMaterial" id="AccentProcess"]
+emission_shape = 2
+emission_sphere_radius = 0.68
+spread = 180.0
+initial_velocity_min = 0.08
+initial_velocity_max = 0.18
+orbit_velocity_min = 0.12
+orbit_velocity_max = 0.25
+radial_accel_min = 0.025
+radial_accel_max = 0.06
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_max = 1.1
+color_ramp = SubResource("ParticleFadeTexture")
+
+[node name="AttractorShowcase" type="Node3D" unique_id=1432756584]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_showcase")
+
+[node name="Floor" type="MeshInstance3D" parent="Environment"]
+mesh = SubResource("FloorMesh")
+material_override = SubResource("FloorMaterial")
+
+[node name="Display" type="Node3D" parent="."]
+
+[node name="Pedestal" type="MeshInstance3D" parent="Display"]
+position = Vector3(0, 0.11, 0)
+mesh = SubResource("PedestalMesh")
+material_override = SubResource("PedestalMaterial")
+
+[node name="TopPlate" type="MeshInstance3D" parent="Display"]
+position = Vector3(0, 0.2375, 0)
+mesh = SubResource("TopMesh")
+material_override = SubResource("PedestalMaterial")
+
+[node name="CyanInlay" type="MeshInstance3D" parent="Display"]
+position = Vector3(0, 0.238, 0)
+mesh = SubResource("RingMesh")
+material_override = SubResource("RingMaterial")
+
+[node name="Attractor" type="Node3D" parent="."]
+position = Vector3(0, 1.05, 0)
+
+[node name="Inner" type="CSGSphere3D" parent="Attractor" unique_id=1295884782]
 material_override = SubResource("ShaderMaterial_wm2lr")
-radial_segments = 20
-rings = 20
+radial_segments = 48
+rings = 32
 
-[node name="Outer" type="CSGSphere3D" parent="." unique_id=466858211]
+[node name="Outer" type="CSGSphere3D" parent="Attractor" unique_id=466858211]
 material_override = SubResource("ShaderMaterial_u7kom")
 radius = 0.6
-radial_segments = 20
-rings = 20
+radial_segments = 64
+rings = 40
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1830140357]
-visible = false
+[node name="EnergyParticles" type="GPUParticles3D" parent="Attractor"]
+amount = 44
+lifetime = 6.0
+preprocess = 6.0
+randomness = 0.6
+visibility_aabb = AABB(-2, -2, -2, 4, 4, 4)
+process_material = SubResource("MoteProcess")
+draw_pass_1 = SubResource("MoteMesh")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1272573327]
-transform = Transform3D(1, 0, 0, 0, 0.76052415, 0.64930964, 0, -0.64930964, 0.76052415, 0, 0.8892547, 1.1088303)
-visible = false
+[node name="AccentParticles" type="GPUParticles3D" parent="Attractor"]
+amount = 7
+lifetime = 1.8
+preprocess = 2.0
+randomness = 0.8
+visibility_aabb = AABB(-2, -2, -2, 4, 4, 4)
+process_material = SubResource("AccentProcess")
+draw_pass_1 = SubResource("AccentMesh")
+
+[node name="AttractorLight" type="OmniLight3D" parent="Attractor"]
+position = Vector3(0, -0.25, 0.12)
+light_color = Color(0.08, 0.65, 1, 1)
+light_energy = 1.6
+light_size = 0.25
+omni_range = 4.5
+omni_attenuation = 1.6
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="WarmRimLight" type="SpotLight3D" parent="Lighting"]
+position = Vector3(-2.5, 2.8, -1.8)
+rotation_degrees = Vector3(-40, -126, 0)
+light_color = Color(1, 0.37, 0.12, 1)
+light_energy = 1.2
+light_size = 0.5
+shadow_enabled = true
+spot_range = 7.0
+spot_angle = 40.0
+spot_attenuation = 1.0
+
+[node name="FillLight" type="SpotLight3D" parent="Lighting"]
+position = Vector3(0.8, 4, -2.2)
+rotation_degrees = Vector3(-57, 20, 0)
+light_color = Color(0.4, 0.55, 0.8, 1)
+light_energy = 0.65
+light_size = 0.8
+spot_range = 8.0
+spot_angle = 48.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(2.9, 1.95, 5.0)
+rotation_degrees = Vector3(-11, 27, 0)
+current = true
+fov = 42.0
+near = 0.05
+far = 160.0

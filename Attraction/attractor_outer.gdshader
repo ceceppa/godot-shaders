@@ -31,7 +31,8 @@ void fragment() {
     float flow = sin(UV.y * 20.0 - TIME * 4.0) * 0.5 + 0.5;
     vec3 color = mix(edge_color.rgb, glow_color.rgb, flow);
 
-    ALBEDO = color * 0.15;
+    // Preserve the unlit Fresnel field while supplying HDR glow.
+    ALBEDO = color * fresnel * emission_strength * pulse;
     EMISSION = color * fresnel * emission_strength * pulse;
     ALPHA = fresnel * alpha_strength * pulse;
 }
