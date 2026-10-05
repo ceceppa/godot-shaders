@@ -1,19 +1,22 @@
 [gd_scene format=4 uid="uid://cjcegx47nxuxi"]
 
-[ext_resource type="Shader" uid="uid://6og3dmygrvnj" path="res://Attraction/attractor_inner.gdshader" id="1_wm2lr"]
 [ext_resource type="Shader" uid="uid://2v3uygtvg6je" path="res://Attraction/attractor.gdshader" id="3_65enw"]
 [ext_resource type="Shader" uid="uid://dg88uhrngpmxq" path="res://Attraction/showcase_surface.gdshader" id="3_surface"]
 [ext_resource type="Shader" uid="uid://emgy7yxd7saw" path="res://Attraction/energy_mote.gdshader" id="4_mote"]
 [ext_resource type="Script" uid="uid://dhmoc686yfes6" path="res://Attraction/attraction_trails.gd" id="5_trails"]
 [ext_resource type="Shader" uid="uid://bxag3e0mciaa2" path="res://Attraction/attraction_trails.gdshader" id="6_trails"]
+[ext_resource type="Shader" uid="uid://cogi32lkiqkf8" path="res://Attraction/atmosphere.gdshader" id="7_atmosphere"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_u5mtm"]
+[sub_resource type="ShaderMaterial" id="AtmosphereMaterial"]
+shader = ExtResource("7_atmosphere")
+shader_parameter/horizon_color = Color(0.18, 0.23, 0.3, 1)
+shader_parameter/upper_color = Color(0.18718839, 0.25449365, 0.37216693, 1)
 
 [sub_resource type="Sky" id="Sky_65enw"]
-sky_material = SubResource("PanoramaSkyMaterial_u5mtm")
+sky_material = SubResource("AtmosphereMaterial")
 
 [sub_resource type="Environment" id="Environment_showcase"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.006, 0.012, 0.023, 1)
 sky = SubResource("Sky_65enw")
 ambient_light_source = 2
@@ -31,9 +34,9 @@ glow_strength = 0.85
 glow_bloom = 0.08
 glow_hdr_threshold = 1.2
 fog_enabled = true
-fog_light_color = Color(0.025, 0.045, 0.075, 1)
-fog_light_energy = 0.35
-fog_density = 0.008
+fog_light_color = Color(0.11, 0.15, 0.21, 1)
+fog_density = 0.035
+fog_sky_affect = 0.0
 
 [sub_resource type="ShaderMaterial" id="FloorMaterial"]
 render_priority = 0
@@ -41,11 +44,11 @@ shader = ExtResource("3_surface")
 shader_parameter/surface_color = Color(0.085, 0.105, 0.135, 1)
 shader_parameter/metalness = 0.12
 shader_parameter/roughness = 0.78
-shader_parameter/panel_strength = 0.08
+shader_parameter/panel_strength = 0.47600002261
 shader_parameter/panel_spacing = 1.8
 
 [sub_resource type="PlaneMesh" id="FloorMesh"]
-size = Vector2(200, 200)
+size = Vector2(1000, 1000)
 
 [sub_resource type="ShaderMaterial" id="PedestalMaterial"]
 render_priority = 0
@@ -82,19 +85,6 @@ outer_radius = 1.055
 rings = 96
 ring_segments = 12
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wm2lr"]
-render_priority = 0
-shader = ExtResource("1_wm2lr")
-shader_parameter/base_color = Color(0.015, 0.065, 0.16, 1)
-shader_parameter/hot_color = Color(0.25, 0.8, 1, 1)
-shader_parameter/emission_strength = 1.8
-shader_parameter/pulse_speed = 2.2
-shader_parameter/pulse_amount = 0.1
-shader_parameter/swirl_scale = 14.0
-shader_parameter/swirl_speed = 1.8
-shader_parameter/band_scale = 10.0
-shader_parameter/band_speed = 3.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u7kom"]
 render_priority = 0
 shader = ExtResource("3_65enw")
@@ -104,16 +94,16 @@ shader_parameter/fresnel_power = 3.5
 shader_parameter/alpha_strength = 2.0
 shader_parameter/emission_strength = 4.0
 shader_parameter/wave_scale = 12.0
-shader_parameter/wave_speed = 3.0
+shader_parameter/wave_speed = 2.0
 shader_parameter/distortion_amount = 0.05
 shader_parameter/pulse_speed = 2.5
 shader_parameter/pulse_amount = 0.15
 shader_parameter/base_color = Color(0.015, 0.065, 0.16, 1)
 shader_parameter/hot_color = Color(0.15, 0.8, 1, 1)
-shader_parameter/swirl_scale = 8.0
-shader_parameter/swirl_speed = 1.8
+shader_parameter/swirl_scale = 4.0
+shader_parameter/swirl_speed = 3.0
 shader_parameter/band_scale = 10.0
-shader_parameter/band_speed = 20.0
+shader_parameter/band_speed = 12.0
 
 [sub_resource type="ShaderMaterial" id="TrailMaterial"]
 render_priority = 0
@@ -220,12 +210,6 @@ mesh = SubResource("RingMesh")
 [node name="Attractor" type="Node3D" parent="." unique_id=1606721232]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 
-[node name="Inner" type="CSGSphere3D" parent="Attractor" unique_id=1295884782]
-visible = false
-material_override = SubResource("ShaderMaterial_wm2lr")
-radial_segments = 64
-rings = 40
-
 [node name="Outer" type="CSGSphere3D" parent="Attractor" unique_id=466858211]
 material_override = SubResource("ShaderMaterial_u7kom")
 radius = 0.6
@@ -255,16 +239,6 @@ randomness = 0.8
 visibility_aabb = AABB(-2, -2, -2, 4, 4, 4)
 process_material = SubResource("AccentProcess")
 draw_pass_1 = SubResource("AccentMesh")
-
-[node name="AttractorLight" type="OmniLight3D" parent="Attractor" unique_id=1398276586]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0.12)
-visible = false
-light_color = Color(0.08, 0.65, 1, 1)
-light_energy = 1.1
-light_size = 0.25
-light_specular = 0.15
-omni_range = 4.5
-omni_attenuation = 1.6
 
 [node name="Lighting" type="Node3D" parent="." unique_id=599137110]
 
@@ -296,7 +270,7 @@ spot_range = 8.0
 spot_angle = 48.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1073715118]
-transform = Transform3D(0.8910065, -0.08662547, 0.4456494, 0, 0.98162717, 0.190809, -0.4539905, -0.17001206, 0.87463623, 2.9, 1.95, 5)
+transform = Transform3D(0.8910065, -0.08662547, 0.4456494, 0, 0.98162717, 0.190809, -0.4539905, -0.17001206, 0.87463623, 2.5, 1.95, 5)
 current = true
 fov = 42.0
-far = 160.0
+far = 300.0

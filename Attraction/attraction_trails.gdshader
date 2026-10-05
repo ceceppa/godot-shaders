@@ -9,5 +9,6 @@ void fragment() {
     float delta = head - UV.x;
     float streak = (1.0 - smoothstep(0.0, 0.22, delta)) * step(0.0, delta);
     ALBEDO = energy_color.rgb * (0.45 + streak * 3.0);
-    ALPHA = across * ends * (0.12 + streak * 0.75);
+    // Fully transparent between moving streaks; no persistent path line.
+    ALPHA = across * ends * streak * 0.75;
 }
